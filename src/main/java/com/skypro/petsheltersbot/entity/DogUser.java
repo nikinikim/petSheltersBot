@@ -4,18 +4,12 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "animal_users")
-public class User {
+@Table(name = "dog_users")
+public class DogUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
-    private String firstNameCatUser;
-
-    @Column
-    private String lastNameCatUser;
-
     @Column
     private String firstNameDogUser;
 
@@ -28,22 +22,6 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getFirstNameCatUser() {
-        return firstNameCatUser;
-    }
-
-    public void setFirstNameCatUser(String firstNameCatUser) {
-        this.firstNameCatUser = firstNameCatUser;
-    }
-
-    public String getLastNameCatUser() {
-        return lastNameCatUser;
-    }
-
-    public void setLastNameCatUser(String lastNameCatUser) {
-        this.lastNameCatUser = lastNameCatUser;
     }
 
     public String getFirstNameDogUser() {
