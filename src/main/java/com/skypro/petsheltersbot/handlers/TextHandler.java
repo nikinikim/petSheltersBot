@@ -2,6 +2,7 @@ package com.skypro.petsheltersbot.handlers;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,6 @@ public class TextHandler extends AbstractMessagingHandler {
 
     @Override
     public void handlerUpdate(Update update) {
-        telegramBot.execute(new sendMessage(update.message().chat().id(), "Для старта наберите: /start"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(), "Для старта наберите: /start"));
     }
 }
