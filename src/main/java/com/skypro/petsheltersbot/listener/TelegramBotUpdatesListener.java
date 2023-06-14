@@ -7,6 +7,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import com.skypro.petsheltersbot.handlers.TelegramHandler;
 import liquibase.pro.packaged.S;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
+@AllArgsConstructor
 public class TelegramBotUpdatesListener implements UpdatesListener {
 
     private static final Logger LOG = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
@@ -31,12 +33,13 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     private final InfoMessageRepository infoMessageRepository;
     private final List<TelegramHandler> handlers;
 
-    public TelegramBotUpdatesListener(TelegramBot telegramBot, InfoMessageRepository infoMessageRepository, List<TelegramHandler> handlers) {
-        this.telegramBot = telegramBot;
-        this.infoMessageRepository = infoMessageRepository;
-        this.handlers = handlers;
-        this.telegramBot.setUpdatesListener(this);
-    }
+//    public TelegramBotUpdatesListener(TelegramBot telegramBot, InfoMessageRepository infoMessageRepository, List<TelegramHandler> handlers) {
+//        this.telegramBot = telegramBot;
+//        this.infoMessageRepository = infoMessageRepository;
+//        this.handlers = handlers;
+//        this.telegramBot.setUpdatesListener(this);
+//    }
+
 //
 //    private boolean start;
 //
@@ -133,15 +136,15 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
 //        infoMessageRepository.save(infoMessage);
 //    }
 
-    //    public void sendMessage(Long chatId, String message) {
-//        telegramBot.execute(new SendMessage(chatId, message));
-//    }
-
-    public void sendMessage(Long chatId, String message) {
-        SendMessage sendMessage = new SendMessage(chatId, message);
-        SendResponse sendResponse = telegramBot.execute(sendMessage);
-        if (!sendResponse.isOk()) {
-            LOG.error("Error during sending message: {}", sendResponse.description());
-        }
+        public void sendMessage(Long chatId, String message) {
+        telegramBot.execute(new SendMessage(chatId, message));
     }
+
+//    public void sendMessage(Long chatId, String message) {
+//        SendMessage sendMessage = new SendMessage(chatId, message);
+//        SendResponse sendResponse = telegramBot.execute(sendMessage);
+//        if (!sendResponse.isOk()) {
+//            LOG.error("Error during sending message: {}", sendResponse.description());
+//        }
+//    }
 }
