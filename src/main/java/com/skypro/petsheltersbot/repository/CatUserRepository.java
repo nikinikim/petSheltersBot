@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 
 
-@Repository
+
 public interface CatUserRepository extends JpaRepository<CatUser, Long> {
 
-    CatUser findAllCatUser(Long id);
+    CatUser findDogUsersById(Long id);
 
 }

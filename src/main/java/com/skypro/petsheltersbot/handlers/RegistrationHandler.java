@@ -38,6 +38,9 @@ public class RegistrationHandler extends AbstractMessagingHandler {
         }
         if (update.message().text() != null || update.message().text().equals("/registration")) {
             weight += 1;
+            telegramBot.execute(
+                    new SendMessage(update.message().chat().id(),
+                            "Привет " + update.message().from().firstName()));
         } else if (update.message().text().equals("/Enter")) {
             weight += 1;
         }
@@ -112,6 +115,7 @@ public class RegistrationHandler extends AbstractMessagingHandler {
                     .state(UserStatus.LOGIN)
                     .build();
             return dogUserRepositiry.save(transientDogUser);
+
         }
         return persistentDogUser;
     }

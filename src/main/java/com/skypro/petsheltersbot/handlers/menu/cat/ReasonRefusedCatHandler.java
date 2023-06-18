@@ -1,24 +1,19 @@
-package com.skypro.petsheltersbot.handlers.menu;
+package com.skypro.petsheltersbot.handlers.menu.cat;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
-import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.skypro.petsheltersbot.handlers.AbstractMessagingHandler;
-import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
-@Component
-public class ReasonRefusedHandler extends AbstractMessagingHandler {
-    public ReasonRefusedHandler(TelegramBot telegramBot) {
+public class ReasonRefusedCatHandler extends AbstractMessagingHandler {
+    public ReasonRefusedCatHandler(TelegramBot telegramBot) {
         super(telegramBot);
     }
 
     @Override
-    public int getWeight(@NotNull Update update) {
+    public int getWeight(Update update) {
         int weight = 0;
-        if (update.callbackQuery() != null) {
+        if (update.message().text() != null) {
             weight += 1;
         }
         if (update.callbackQuery() != null || update.message().text().equals("/reasonRefused")) {
@@ -46,6 +41,5 @@ public class ReasonRefusedHandler extends AbstractMessagingHandler {
                 "Если Вы хотите зарегистрироваться на нашем сайте, нажмите /registration"));
         telegramBot.execute(new SendMessage(update.message().chat().id(),
                 "Все интересующие вопросы Вы можете задать нашим волонтерам, нажав /callVolunteer"));
-
     }
 }

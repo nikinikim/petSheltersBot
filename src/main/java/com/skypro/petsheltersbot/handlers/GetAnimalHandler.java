@@ -20,7 +20,7 @@ public class GetAnimalHandler extends AbstractMessagingHandler {
     @Override
     public int getWeight(Update update) {
         int weight = 0;
-        if (update.message().text() != null) {
+        if (update.message().text() != null || update.callbackQuery() != null) {
             weight += 1;
         }
         if (update.message().text() != null && update.message().text().equals("/Menu")) {
@@ -31,26 +31,16 @@ public class GetAnimalHandler extends AbstractMessagingHandler {
 
     @Override
     public void handleUpdate(Update update) {
-        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
-        keyboardMarkup.addRow(
-                new InlineKeyboardButton("Кошка").callbackData("/Cat"),
-                new InlineKeyboardButton("Собака").callbackData("/Dog"));
         telegramBot.execute(new SendMessage(update.message().chat().id(),
-                "Выберите питомца, которого Вы предпочитаете!").replyMarkup(keyboardMarkup));
-        CallbackQuery callbackQuery = update.callbackQuery();
-        if (update.callbackQuery() != null) {
-            String data = update.callbackQuery().data();
-            if (data.equals("Собака")) {
-                this.telegramBot.execute(new SendMessage(update.callbackQuery().from().id(), "Выберите питомца, которого Вы предпочитаете!"));
-                InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton("Собака");
-                inlineKeyboardButton.callbackData("Выберите пункт меню, который Вас интересует");
-                List<InlineKeyboardButton> buttonList = new ArrayList<>();
-                buttonList.add(new InlineKeyboardButton("Правила знакомства с собакой или щенком").callbackData("/ruleDating"));
-            }
+                "Выберите питомца, которого Вы предпочитаете!"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "/Cat"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "/Dog"));
 
-        }
     }
 }
+
 
 
 

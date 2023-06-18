@@ -18,7 +18,7 @@ import java.util.Map;
 public class GetDogHandler extends AbstractMessagingHandler {
 
 
-    public GetDogHandler(TelegramBot telegramBot, DogUserService dogService) {
+    public GetDogHandler(TelegramBot telegramBot) {
         super(telegramBot);
 
 
@@ -29,35 +29,41 @@ public class GetDogHandler extends AbstractMessagingHandler {
     @Override
     public int getWeight(Update update) {
         int weight = 0;
-        if (update.callbackQuery() != null) {
+        if (update.message().text() != null) {
             weight += 1;
         }
-        if (update.callbackQuery() != null) {
-            String data = update.callbackQuery().data();
-            if (data.equals("/Dog"))
-                weight += 1;
+        if (update.message().text().equals("/Dog")) {
+            weight += 1;
         }
         return weight;
     }
 
     @Override
     public void handleUpdate(Update update) {
-        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
-        InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton("Собака");
-        inlineKeyboardButton.callbackData("Выберите пункт меню, который Вас интересует");
-        List<InlineKeyboardButton> buttonList = new ArrayList<>();
-        buttonList.add(new InlineKeyboardButton("Правила знакомства с собакой или щенком").callbackData("/ruleDating"));
-        keyboardMarkup.addRow(new InlineKeyboardButton("Список документов на усыновление").callbackData("/documents"));
-        keyboardMarkup.addRow(new InlineKeyboardButton("Правила перевозки собаки или щенка").callbackData("/transportirationRules"));
-        keyboardMarkup.addRow(new InlineKeyboardButton("Правила размещения щенка").callbackData("/placementRulesLittle"));
-        keyboardMarkup.addRow(new InlineKeyboardButton("Правила размещения взрослой собаки").callbackData("/placementRulesBig"));
-        keyboardMarkup.addRow(new InlineKeyboardButton("Правила размещения животного c ограниченными возможностями").callbackData("/specialPlacementRules"));
-        keyboardMarkup.addRow(new InlineKeyboardButton("Первые советы кинолога").callbackData("/firstTipsDogHandler"));
-        keyboardMarkup.addRow(new InlineKeyboardButton("Причины обращения к кинологу").callbackData("/reasonsContactingDogHandler"));
-        keyboardMarkup.addRow(new InlineKeyboardButton("Причины отказа").callbackData("/reasonRefused"));
-        keyboardMarkup.addRow(new InlineKeyboardButton("Регистрация").callbackData("/registration"));
-        keyboardMarkup.addRow(new InlineKeyboardButton("Позвать на помощь волонтера").callbackData("/callVolunteer"));
-
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Выберите пункт меню, который Вас интересует"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Правила знакомства с собакой или щенком, /ruleDating"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Список документов на усыновление, /documents"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Правила перевозки собаки или щенка, /transportirationRules"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Правила размещения щенка, /placementRulesLittle"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Правила размещения взрослой собаки, /placementRulesBig"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Правила размещения животного c ограниченными возможностями, /specialPlacementRules"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Первые советы кинолога, /firstTipsDogHandler"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Причины обращения к кинологу, /reasonsContactingDogHandler"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Причины отказа, /reasonRefused"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Регистрация, /registration"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Позвать на помощь волонтера, /callVolunteer"));
 
     }
 }

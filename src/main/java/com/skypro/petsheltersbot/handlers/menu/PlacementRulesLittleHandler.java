@@ -28,11 +28,9 @@ public class PlacementRulesLittleHandler extends AbstractMessagingHandler {
 
     @Override
     public void handleUpdate(Update update) {
-        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
-        keyboardMarkup.addRow(new InlineKeyboardButton("Меню").callbackData("/Menu"));
         telegramBot.execute(new SendMessage(update.message().chat().id(),
                 "1. Перед тем как взять щенка из приюта," +
-                "обязательно выясните, все ли прививки сделали питомцу \n\n " +
+                        "обязательно выясните, все ли прививки сделали питомцу \n\n " +
                         "2. Не организовывайте для щенка лишь одно место, " +
                         "где ему позволено спать и лежать. \n\n " +
                         "3. Оборудуйте один из укромных уголков для щенка у вашей кровати \n\n " +
@@ -42,7 +40,10 @@ public class PlacementRulesLittleHandler extends AbstractMessagingHandler {
                         "6. Старайтесь не перегружать щенка излишней физической активностью \n\n " +
                         "7. Старайтесь побольше общаться со щенком \n\n " +
                         "8. Дайте щенку побольше игрушек \n\n " +
-                        "9. Общий курс дрессировки можно начинать примерно через пару месяцев \n\n ").replyMarkup(keyboardMarkup));
+                        "9. Общий курс дрессировки можно начинать примерно через пару месяцев \n\n "));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Для ознакомления с правилами размещения взрослой собаки" +
+                        "после приезда из приюта, нажмите /placementRulesBig"));
 
     }
 }
