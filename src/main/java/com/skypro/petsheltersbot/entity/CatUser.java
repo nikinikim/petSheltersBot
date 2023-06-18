@@ -1,6 +1,6 @@
 package com.skypro.petsheltersbot.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class CatUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     @Column
     private String firstNameCatUser;

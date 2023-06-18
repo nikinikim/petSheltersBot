@@ -1,10 +1,16 @@
 package com.skypro.petsheltersbot.entity;
 
-import javax.persistence.*;
-
+import com.skypro.petsheltersbot.config.UserStatus;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "dog_users")
+@Table(name = "user_shelter")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DogUser {
 
     @Id
@@ -15,6 +21,16 @@ public class DogUser {
 
     @Column
     private String lastNameDogUser;
+
+    private Long telegramUserId;
+
+    private String login;
+
+    private String password;
+
+    private String userName;
+
+    private UserStatus state;
 
     public long getId() {
         return id;
