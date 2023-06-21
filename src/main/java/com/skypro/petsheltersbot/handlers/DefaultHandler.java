@@ -24,16 +24,6 @@ public class DefaultHandler extends AbstractMessagingHandler {
         telegramBot.execute(new SendMessage(update.message().chat().id(), "Для продолжения нажмите /start"));
     }
 
-    /*@Override
-    public void handlerUpdateCat(Update update) {
-        telegramBot.execute(new SendMessage(update.message().chat().id(), "Для продолжения нажмите кнопку Кошки или Собаки"));
-    }
-
-    @Override
-    public void handlerUpdateDog(Update update) {
-        telegramBot.execute(new SendMessage(update.message().chat().id(), "Для продолжения нажмите кнопку Кошки или Собаки"));
-    }*/
-
     @Override
     public void handlerUpdatePet(Update update, String petType) {
         telegramBot.execute(new SendMessage(update.message().chat().id(), "Для продолжения нажмите кнопку "));
