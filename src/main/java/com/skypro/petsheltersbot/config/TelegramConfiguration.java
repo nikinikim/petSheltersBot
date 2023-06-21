@@ -1,7 +1,7 @@
 package com.skypro.petsheltersbot.config;
 
 import com.pengrad.telegrambot.TelegramBot;
-import com.skypro.petsheltersbot.listener.TelegramUpdatesListener;
+import com.skypro.petsheltersbot.listener.TelegramBotUpdatesListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

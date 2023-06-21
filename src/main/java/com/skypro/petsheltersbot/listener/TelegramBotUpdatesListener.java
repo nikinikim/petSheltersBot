@@ -41,26 +41,15 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                         Long chatId = message.chat().id();
                         String text = message.text();
 
-                        // Передача сообщения в обработчик VolunteerRequestHandler
-                        volunteerRequestHandler.processMessage(text, chatId);
-
                         if ("/start".equals(text)) {
-                            sendMessage(chatId, "Вам необходимо прислать отчет о питомце: в отчете должен содержаться текстовый файл и отдельное прикрепленное фото");
+                            volunteerRequestHandler.handleVolunteerRequest(chatId);
                         } else {
-                            sendMessage(chatId, "Некорректный формат сообщения!");
+                            volunteerRequestHandler.processUserQuestion(chatId, text);
                         }
                     });
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
-    }
-
-    private void sendMessage(Long chatId, String message) {
-        SendMessage sendMessage = new SendMessage(chatId, message);
-        SendResponse sendResponse = telegramBot.execute(sendMessage);
-        if (!sendResponse.isOk()) {
-            logger.error("Error during sending message: {}", sendResponse.description());
-        }
     }
 }

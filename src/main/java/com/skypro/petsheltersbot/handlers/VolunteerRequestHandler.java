@@ -7,17 +7,16 @@ import com.skypro.petsheltersbot.entity.Volunteer;
 import com.skypro.petsheltersbot.reposetory.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
 import java.util.Random;
-@Component
+@Service
 public class VolunteerRequestHandler {
-
     private final TelegramBot telegramBot;
     private final VolunteerRepository volunteerRepository;
 
-    @Autowired
     public VolunteerRequestHandler(TelegramBot telegramBot, VolunteerRepository volunteerRepository) {
         this.telegramBot = telegramBot;
         this.volunteerRepository = volunteerRepository;
@@ -26,27 +25,44 @@ public class VolunteerRequestHandler {
     public void handleVolunteerRequest(long chatId) {
         String message = "Спасибо за ваше обращение! Мы уже связываемся с нашим волонтером.";
 
-        sendMessage(chatId, message);
-    }
+        SendMessage request = new SendMessage(chatId, message);
+        telegramBot.execute(request);
 
-    public void handleNewVolunteer(long chatId, String username, String phoneNumber) {
-        Volunteer volunteer = new Volunteer();
-        volunteer.setName(username);
-        volunteer.setUsername(username);
-        volunteer.setPhoneNumber(phoneNumber);
-        volunteerRepository.save(volunteer);
+        Volunteer volunteer = getRandomVolunteer();
 
-        String response = "Вы успешно зарегистрировались как волонтер! Мы свяжемся с вами в ближайшее время.";
-        sendMessage(chatId, response);
-    }
+        if (volunteer != null) {
+            String volunteerMessage = "У вас новый запрос на помощь!\n\n"
+                    + "Пожалуйста, свяжитесь с пользователем для предоставления необходимой помощи.";
 
-    private void sendMessage(Long chatId, String message) {
-        SendMessage sendMessage = new SendMessage(chatId, message);
-        SendResponse sendResponse = telegramBot.execute(sendMessage);
-        if (!sendResponse.isOk()) {
-
+            SendMessage volunteerRequest = new SendMessage(volunteer.getUsername(), volunteerMessage);
+            telegramBot.execute(volunteerRequest);
         }
     }
-}
 
+    public void processUserQuestion(long chatId, String question) {
+        Volunteer volunteer = getRandomVolunteer();
+
+        if (volunteer != null) {
+            String volunteerMessage = "Вам поступил вопрос от пользователя:\n\n"
+                    + question
+                    + "\n\nПожалуйста, ответите на него.";
+
+            SendMessage volunteerResponse = new SendMessage(volunteer.getUsername(), volunteerMessage);
+            telegramBot.execute(volunteerResponse);
+        } else {
+            String errorMessage = "К сожалению, в данный момент нет доступных волонтеров. Пожалуйста, попробуйте позже.";
+            SendMessage errorResponse = new SendMessage(chatId, errorMessage);
+            telegramBot.execute(errorResponse);
+        }
+    }
+
+    private Volunteer getRandomVolunteer() {
+        List<Volunteer> volunteers = volunteerRepository.findAll();
+        if (!volunteers.isEmpty()) {
+            int randomIndex = new Random().nextInt(volunteers.size());
+            return volunteers.get(randomIndex);
+        }
+        return null;
+    }
+}
 
