@@ -43,6 +43,10 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
 
                         if ("/start".equals(text)) {
                             volunteerRequestHandler.handleVolunteerRequest(chatId);
+                        } else if ("/add_volunteer".equals(text)) {
+                            // Отправляем сообщение с запросом данных о волонтере
+                            SendMessage requestMessage = new SendMessage(chatId, "Пожалуйста, отправьте свои данные: имя, никнейм и номер телефона.");
+                            telegramBot.execute(requestMessage);
                         } else {
                             volunteerRequestHandler.processUserQuestion(chatId, text);
                         }

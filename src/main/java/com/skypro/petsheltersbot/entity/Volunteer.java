@@ -17,9 +17,6 @@ public class Volunteer {
     private String username;
 
     @Column(nullable = false)
-    private String nickname;
-
-    @Column(nullable = false)
     private String phoneNumber;
 
 
@@ -27,10 +24,9 @@ public class Volunteer {
 
     }
 
-    public Volunteer(String name, String username, String nickname, String phoneNumber) {
+    public Volunteer(String name, String username, String phoneNumber) {
         this.name = name;
         this.username = username;
-        this.nickname = nickname;
         this.phoneNumber = phoneNumber;
     }
 
@@ -56,14 +52,6 @@ public class Volunteer {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public String getPhoneNumber() {

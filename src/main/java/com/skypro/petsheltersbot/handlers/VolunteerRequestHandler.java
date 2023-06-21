@@ -4,6 +4,7 @@ import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import com.skypro.petsheltersbot.entity.Volunteer;
+import com.skypro.petsheltersbot.listener.TelegramBotUpdatesListener;
 import com.skypro.petsheltersbot.reposetory.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -64,5 +65,13 @@ public class VolunteerRequestHandler {
         }
         return null;
     }
-}
 
+    public void processVolunteerData(String name, String username, String phoneNumber) {
+        Volunteer volunteer = new Volunteer(name, username, phoneNumber);
+        volunteerRepository.save(volunteer);
+
+        String successMessage = "Спасибо за вашу регистрацию в качестве волонтера! Теперь вы можете помогать нам.";
+        SendMessage response = new SendMessage(username, successMessage);
+        telegramBot.execute(response);
+    }
+}
