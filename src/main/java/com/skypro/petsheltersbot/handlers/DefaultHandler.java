@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order
-public class DefaultHandler extends AbstractMessagingHandler{
+public class DefaultHandler extends AbstractMessagingHandler {
 
     public DefaultHandler(TelegramBot telegramBot) {
         super(telegramBot);
@@ -21,7 +21,21 @@ public class DefaultHandler extends AbstractMessagingHandler{
 
     @Override
     public void handlerUpdate(Update update) {
-        telegramBot.execute(new SendMessage(update.message().chat().id(), "Для старта наберите: /start"));
+        telegramBot.execute(new SendMessage(update.message().chat().id(), "Для продолжения нажмите /start"));
     }
 
+    /*@Override
+    public void handlerUpdateCat(Update update) {
+        telegramBot.execute(new SendMessage(update.message().chat().id(), "Для продолжения нажмите кнопку Кошки или Собаки"));
+    }
+
+    @Override
+    public void handlerUpdateDog(Update update) {
+        telegramBot.execute(new SendMessage(update.message().chat().id(), "Для продолжения нажмите кнопку Кошки или Собаки"));
+    }*/
+
+    @Override
+    public void handlerUpdatePet(Update update, String petType) {
+        telegramBot.execute(new SendMessage(update.message().chat().id(), "Для продолжения нажмите кнопку "));
+    }
 }
