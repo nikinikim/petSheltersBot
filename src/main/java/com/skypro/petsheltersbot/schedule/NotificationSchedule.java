@@ -26,5 +26,6 @@ public class NotificationSchedule {
         LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
         List<InfoMessage> list = infoMessageRepository.findNInfoMessageBySendDateBetween(now, now.plusSeconds(59));
         list.forEach(i -> telegramBotUpdatesListener.sendMessage(i.getChatId(), i.getNotification()));
+
     }
 }

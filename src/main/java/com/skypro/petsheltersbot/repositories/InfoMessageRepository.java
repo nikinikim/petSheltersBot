@@ -12,4 +12,5 @@ import java.util.List;
 public interface InfoMessageRepository extends JpaRepository<InfoMessage, Long> {
     @Query("select n from InfoMessage n where n.sendDate between ?1 and ?2")
     List<InfoMessage> findNInfoMessageBySendDateBetween(LocalDateTime d1, LocalDateTime d2);
+
 }

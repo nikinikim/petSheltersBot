@@ -61,6 +61,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         }
     }
 
+
     private void handlerUpdatePet(String data, Long fromId) {
         if (data.contains("/Информация_о_приюте")) {
             this.telegramBot.execute(new SendMessage(fromId, String.format("Приют для %s", data.startsWith("/Cats") ? "кошек. Основан..." : "собак. Основан...")));
@@ -84,4 +85,5 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     public void sendMessage(Long chatId, String message) {
         telegramBot.execute(new SendMessage(chatId, message));
     }
+
 }

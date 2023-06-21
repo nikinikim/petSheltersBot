@@ -27,4 +27,5 @@ public class TextHandler extends AbstractMessagingHandler {
     @Override
     public void handlerUpdatePet(Update update, String petType) {
     }
+
 }

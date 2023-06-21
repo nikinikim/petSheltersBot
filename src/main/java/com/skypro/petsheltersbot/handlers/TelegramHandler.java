@@ -8,4 +8,5 @@ public interface TelegramHandler {
     void handlerUpdate(Update update);
 
     void handlerUpdatePet(Update update, String petType);
+
 }

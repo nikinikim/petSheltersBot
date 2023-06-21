@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Order(1)
 public class StartHandler extends AbstractMessagingHandler {
 
+
     public StartHandler(TelegramBot telegramBot) {
         super(telegramBot);
     }
