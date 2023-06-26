@@ -9,9 +9,11 @@ import com.skypro.petsheltersbot.config.UserStatus;
 import com.skypro.petsheltersbot.entity.CatUser;
 import com.skypro.petsheltersbot.entity.DogUser;
 import com.skypro.petsheltersbot.repository.CatUserRepository;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(9)
 public class RegistrationCatHandler extends AbstractMessagingHandler{
     public RegistrationCatHandler(TelegramBot telegramBot, CatUserRepository catUserRepository) {
         super(telegramBot);
@@ -19,29 +21,22 @@ public class RegistrationCatHandler extends AbstractMessagingHandler{
     }
     private final CatUserRepository catUserRepository;
 
-    @Override
-    public int getWeight(Update update) {
-        int weight = 0;
-        if (update.message().text() != null) {
-            weight += 1;
-        }
-        if (update.message().text() != null || update.message().text().equals("/registration")) {
-            weight += 1;
-            telegramBot.execute(
-                    new SendMessage(update.message().chat().id(),
-                            "Привет " + update.message().from().firstName()));
-        } else if (update.message().text().equals("/Enter")) {
-            weight += 1;
-        }
-        return weight;
-    }
-
-    @Override
+     @Override
     public void handleUpdate(Update update) {
         Long chatID = update.message().chat().id();
         Message text = update.message();
         User telegramUser = text.from();
         CatUser catUser = findOrSaveCatUser(telegramUser);
+    }
+
+    @Override
+    public void handlerUpdatePet(Update update, String petType) {
+
+    }
+
+    @Override
+    public boolean appliesTo(Update update) {
+        return update.message().text() != null && update.message().text().equals("/registration");
     }
 
     private CatUser findOrSaveCatUser(User telegramUser){
@@ -59,4 +54,5 @@ public class RegistrationCatHandler extends AbstractMessagingHandler{
         }
         return persistentCatUser;
     }
-}
+
+   }

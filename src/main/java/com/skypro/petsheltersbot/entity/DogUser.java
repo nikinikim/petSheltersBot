@@ -24,9 +24,9 @@ public class DogUser {
 
     private Long telegramUserId;
 
-    private String login;
+    public String login;
 
-    private String password;
+    public String password;
 
     private String userName;
 
