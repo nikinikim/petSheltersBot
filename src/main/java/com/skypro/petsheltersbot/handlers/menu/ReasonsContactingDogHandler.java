@@ -4,22 +4,14 @@ import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.skypro.petsheltersbot.handlers.AbstractMessagingHandler;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
+@Component
+@Order()
 public class ReasonsContactingDogHandler extends AbstractMessagingHandler {
     public ReasonsContactingDogHandler(TelegramBot telegramBot) {
         super(telegramBot);
-    }
-
-    @Override
-    public int getWeight(Update update) {
-        int weight = 0;
-        if (update.callbackQuery() != null) {
-            weight += 1;
-        }
-        if (update.callbackQuery() != null || update.message().text().equals("/reasonsContactingDogHandler")) {
-            weight += 2;
-        }
-        return weight;
     }
 
     @Override
@@ -58,5 +50,15 @@ public class ReasonsContactingDogHandler extends AbstractMessagingHandler {
         telegramBot.execute(new SendMessage(update.message().chat().id(),
                 "Для ознакомления с правилами размещения взрослой кошки" +
                         "после приезда из приюта, нажмите /placementRulesBig"));
+    }
+
+    @Override
+    public void handlerUpdatePet(Update update, String petType) {
+
+    }
+
+    @Override
+    public boolean appliesTo(Update update) {
+        return update.message().text() != null && update.message().text().equals("/reasonsContactingDogHandler");
     }
 }
