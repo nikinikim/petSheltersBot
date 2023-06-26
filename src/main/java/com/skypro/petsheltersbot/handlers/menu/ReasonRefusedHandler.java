@@ -7,25 +7,16 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.skypro.petsheltersbot.handlers.AbstractMessagingHandler;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order()
 public class ReasonRefusedHandler extends AbstractMessagingHandler {
     public ReasonRefusedHandler(TelegramBot telegramBot) {
         super(telegramBot);
     }
 
-    @Override
-    public int getWeight(@NotNull Update update) {
-        int weight = 0;
-        if (update.callbackQuery() != null) {
-            weight += 1;
-        }
-        if (update.callbackQuery() != null || update.message().text().equals("/reasonRefused")) {
-            weight += 2;
-        }
-        return weight;
-    }
 
     @Override
     public void handleUpdate(Update update) {
@@ -47,5 +38,15 @@ public class ReasonRefusedHandler extends AbstractMessagingHandler {
         telegramBot.execute(new SendMessage(update.message().chat().id(),
                 "Все интересующие вопросы Вы можете задать нашим волонтерам, нажав /callVolunteer"));
 
+    }
+
+    @Override
+    public void handlerUpdatePet(Update update, String petType) {
+
+    }
+
+    @Override
+    public boolean appliesTo(Update update) {
+        return update.message().text() != null && update.message().text().equals("/reasonRefused");
     }
 }
