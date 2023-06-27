@@ -13,7 +13,6 @@ public class FirstTipsDogHandler extends AbstractMessagingHandler {
     public FirstTipsDogHandler(TelegramBot telegramBot) {
         super(telegramBot);
     }
-
     @Override
     public boolean appliesTo(Update update) {
         return update.message().text() != null && update.message().text().equals("/firstTipsDogHandler");

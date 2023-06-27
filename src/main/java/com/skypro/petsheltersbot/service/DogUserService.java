@@ -28,7 +28,6 @@ public class DogUserService {
         DogUser user = dogUserMap.get(userID);
         user.password = password;
     }
-
     public DogUser getUser(Long id) {
         return dogUserMap.get(id);
     }

@@ -15,7 +15,6 @@ public class PlacementRulesLittleHandler extends AbstractMessagingHandler {
     public PlacementRulesLittleHandler(TelegramBot telegramBot) {
         super(telegramBot);
     }
-
     @Override
     public void handleUpdate(Update update) {
         telegramBot.execute(new SendMessage(update.message().chat().id(),

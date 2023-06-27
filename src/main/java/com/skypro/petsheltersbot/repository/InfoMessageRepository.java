@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 @Repository
 public interface InfoMessageRepository extends JpaRepository<InfoMessage, Long> {
     @Query("select n from InfoMessage n where n.sendDate between ?1 and ?2")

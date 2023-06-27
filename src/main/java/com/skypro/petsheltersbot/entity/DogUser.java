@@ -1,10 +1,12 @@
 package com.skypro.petsheltersbot.entity;
 
 import com.skypro.petsheltersbot.config.UserStatus;
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user_shelter")
@@ -27,7 +29,6 @@ public class DogUser {
     public String login;
 
     public String password;
-
     private String userName;
 
     private UserStatus state;

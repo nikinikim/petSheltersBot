@@ -10,7 +10,6 @@ import java.util.Map;
 public class CatUserService {
 
     //private final Map<Long, CatUser> catUserMap = new HashMap<>();
-
     private final CatUserRepository catUserRepository;
 
     public CatUserService(CatUserRepository catUserRepository) {

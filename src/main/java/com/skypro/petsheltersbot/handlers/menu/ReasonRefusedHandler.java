@@ -17,7 +17,6 @@ public class ReasonRefusedHandler extends AbstractMessagingHandler {
         super(telegramBot);
     }
 
-
     @Override
     public void handleUpdate(Update update) {
         telegramBot.execute(new SendMessage(update.message().chat().id(),

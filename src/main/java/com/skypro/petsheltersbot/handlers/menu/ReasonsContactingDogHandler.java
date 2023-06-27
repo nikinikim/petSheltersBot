@@ -13,7 +13,6 @@ public class ReasonsContactingDogHandler extends AbstractMessagingHandler {
     public ReasonsContactingDogHandler(TelegramBot telegramBot) {
         super(telegramBot);
     }
-
     @Override
     public void handleUpdate(Update update) {
         telegramBot.execute(new SendMessage(update.message().chat().id(),

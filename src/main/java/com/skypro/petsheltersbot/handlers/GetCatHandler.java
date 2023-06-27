@@ -45,8 +45,7 @@ public class GetCatHandler extends AbstractMessagingHandler {
         }
     }
 
-    @Override
-    public void handlerUpdatePet(Update update, String petType) {
+    @Override    public void handlerUpdatePet(Update update, String petType) {
         InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
         keyboardMarkup.addRow(new InlineKeyboardButton("Правила знакомства c питомцем").callbackData(String.format("/ruleDatingCat")));
         this.telegramBot.execute(new SendMessage(update.message().from().id(), String.format("Если Вы хотите ознакомиться с правилами знакомства питомцем, нажмите кнопку ниже", update.message().chat().id())).replyMarkup(keyboardMarkup));

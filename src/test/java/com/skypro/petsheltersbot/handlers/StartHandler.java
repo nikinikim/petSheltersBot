@@ -16,16 +16,12 @@ public class StartHandler extends AbstractMessagingHandler {
         super(telegramBot);
     }
 
-    @Override
-    public int getWeight(Update update) {
-        return 0;
-    }
+
 
     @Override
-    public void handlerUpdate(Update update) {
+    public void handleUpdate(Update update) {
 
     }
-
 
     @Override
     public void handlerUpdatePet(Update update, String petType) {
@@ -46,12 +42,4 @@ public class StartHandler extends AbstractMessagingHandler {
         return update.message().text() != null && update.message().text().equals("/start");
     }
 
-    @Override
-    public void handleUpdateUser(Update update) {
-        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
-        keyboardMarkup.addRow(new InlineKeyboardButton("Приют для кошек").callbackData("/Cats"),
-                new InlineKeyboardButton("Приют для собак").callbackData("/Dogs"));
-        telegramBot.execute(new SendMessage(update.message().chat().id(), String.format("Привет, %s! Выберите приют, нажав на кнопку ниже:", update.message().from().firstName())).replyMarkup(keyboardMarkup));
-
-    }
 }

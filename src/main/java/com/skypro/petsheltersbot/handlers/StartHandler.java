@@ -20,7 +20,6 @@ public class StartHandler extends AbstractMessagingHandler {
     public boolean appliesTo(Update update) {
         return update.message().text() != null && update.message().text().equals("/start");
     }
-
     @Override
     public void handleUpdate(Update update) {
         InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();

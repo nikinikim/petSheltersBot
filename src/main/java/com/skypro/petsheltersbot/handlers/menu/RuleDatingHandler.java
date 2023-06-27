@@ -34,7 +34,6 @@ public class RuleDatingHandler extends AbstractMessagingHandler {
                                 "8. Постарайтесь привезти питомца к себе домой в гости "));
 
     }
-
     @Override
     public void handlerUpdatePet(Update update, String petType) {
         InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();

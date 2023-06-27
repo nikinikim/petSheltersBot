@@ -16,7 +16,6 @@ import com.skypro.petsheltersbot.repository.CatUserRepository;
 import com.skypro.petsheltersbot.repository.DogUserRepositiry;
 import com.skypro.petsheltersbot.repository.InfoMessageRepository;
 
-import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
@@ -48,8 +48,6 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         this.catUserRepository = catUserRepository;
         this.telegramBot.setUpdatesListener(this);
     }
-
-
     @Override
     public int process(List<Update> updates) {
         updates.stream()

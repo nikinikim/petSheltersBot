@@ -19,10 +19,8 @@ public class CatUser {
     private long id;
     @Column
     private String firstNameCatUser;
-
     @Column
     private String lastNameCatUser;
-
 
     private Long telegramUserId;
 

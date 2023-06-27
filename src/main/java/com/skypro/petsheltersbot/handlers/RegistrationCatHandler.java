@@ -38,7 +38,6 @@ public class RegistrationCatHandler extends AbstractMessagingHandler{
     public boolean appliesTo(Update update) {
         return update.message().text() != null && update.message().text().equals("/registration");
     }
-
     private CatUser findOrSaveCatUser(User telegramUser){
         CatUser persistentCatUser = catUserRepository.findCatUsersById(telegramUser.id());
         if (persistentCatUser == null){

@@ -26,7 +26,6 @@ public class GetDogHandler extends AbstractMessagingHandler {
     public boolean appliesTo(Update update) {
         return update.callbackQuery().message().chat().id() != null && update.callbackQuery().data().equals("/Menu");
     }
-
     @Override
     public void handleUpdate(Update update) {
         InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();

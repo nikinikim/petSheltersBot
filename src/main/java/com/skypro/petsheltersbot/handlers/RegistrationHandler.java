@@ -33,7 +33,6 @@ public class RegistrationHandler extends AbstractMessagingHandler {
         this.dogUserService = dogUserService;
         this.dogUserRepositiry = dogUserRepositiry;
     }
-
     @Override
     public void handleUpdate(Update update) {
         Long chatID = update.message().chat().id();
@@ -75,7 +74,6 @@ public class RegistrationHandler extends AbstractMessagingHandler {
 
 
     }
-
 
     @Override
     public void handlerUpdatePet(Update update, String petType) {
