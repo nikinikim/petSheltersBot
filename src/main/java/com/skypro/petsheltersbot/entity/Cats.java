@@ -1,7 +1,8 @@
 package com.skypro.petsheltersbot.entity;
 
+import com.pengrad.telegrambot.model.PhotoSize;
+
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "cats")
@@ -9,6 +10,7 @@ public class Cats {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
     @Column(name = "nickname", nullable = false)
     private String nickname;
@@ -18,6 +20,8 @@ public class Cats {
     private int age;
     @Column(name = "message", nullable = false)
     private String message;
+    @Column(name = "photo", nullable = false)
+    private PhotoSize photoSize;
 
     public long getId() {
         return id;

@@ -1,0 +1,18 @@
+//package com.skypro.petsheltersbot.configuration;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.scheduling.annotation.EnableScheduling;
+//import com.skypro.petsheltersbot.listener.TelegramBotUpdatesListener;
+//import com.skypro.petsheltersbot.repositories.InfoMessageRepository;
+//import com.skypro.petsheltersbot.schedule.NotificationSchedule;
+//
+//@Configuration
+//@EnableScheduling
+//public class ScheduleConfiguration {
+//    @Bean
+//    public NotificationSchedule notificationSchedule( TelegramBotUpdatesListener telegramBotUpdatesListener, InfoMessageRepository infoMessageRepository) {
+//        return new NotificationSchedule(telegramBotUpdatesListener, infoMessageRepository);
+//    }
+//}
