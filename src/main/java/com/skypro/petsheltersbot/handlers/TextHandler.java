@@ -20,7 +20,7 @@ public class TextHandler extends AbstractMessagingHandler {
     }
 
     @Override
-    public void handlerUpdate(Update update) {
+    public void handleUpdate(Update update) {
         telegramBot.execute(new SendMessage(update.message().chat().id(), "Нажмите кнопку /start и выберите приют ('Приют для кошек' или 'Приют для собак')"));
     }
 
