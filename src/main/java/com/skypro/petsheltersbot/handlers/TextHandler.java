@@ -19,6 +19,11 @@ public class TextHandler extends AbstractMessagingHandler {
         return update.message().text() != null && !update.message().text().isBlank();
     }
 
+    /**
+     * Ответ на неправильный запрос
+     *
+     * @param update
+     */
     @Override
     public void handlerUpdate(Update update) {
         telegramBot.execute(new SendMessage(update.message().chat().id(), "Нажмите кнопку /start и выберите приют ('Приют для кошек' или 'Приют для собак')"));

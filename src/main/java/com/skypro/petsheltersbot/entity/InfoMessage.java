@@ -15,6 +15,7 @@ public class InfoMessage {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
+
     @Column(name = "chat_id")
     private Long chatId;
 

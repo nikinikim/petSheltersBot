@@ -12,7 +12,8 @@ import com.skypro.petsheltersbot.schedule.NotificationSchedule;
 @EnableScheduling
 public class ScheduleConfiguration {
     @Bean
-    public NotificationSchedule notificationSchedule(@Autowired TelegramBotUpdatesListener telegramBotUpdatesListener, @Autowired InfoMessageRepository infoMessageRepository) {
+    public NotificationSchedule notificationSchedule(@Autowired TelegramBotUpdatesListener telegramBotUpdatesListener,
+                                                     @Autowired InfoMessageRepository infoMessageRepository) {
         return new NotificationSchedule(telegramBotUpdatesListener, infoMessageRepository);
     }
 }

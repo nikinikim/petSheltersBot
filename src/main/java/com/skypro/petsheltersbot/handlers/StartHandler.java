@@ -17,11 +17,22 @@ public class StartHandler extends AbstractMessagingHandler {
         super(telegramBot);
     }
 
+    /**
+     * Создание стартовой кнопки
+     *
+     * @param update {@link Update}
+     * @return
+     */
     @Override
     public boolean appliesTo(Update update) {
         return update.message().text() != null && update.message().text().equals("/start");
     }
 
+    /**
+     * Создание кнопок выбора приюта
+     *
+     * @param update
+     */
     @Override
     public void handlerUpdate(Update update) {
         InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
@@ -31,6 +42,12 @@ public class StartHandler extends AbstractMessagingHandler {
 
     }
 
+    /**
+     * Создание кнопок направлений
+     *
+     * @param update
+     * @param petType
+     */
     @Override
     public void handlerUpdatePet(Update update, String petType) {
         if (!StringUtil.isEmpty(petType)) {

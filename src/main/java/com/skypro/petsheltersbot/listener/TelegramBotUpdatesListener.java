@@ -37,6 +37,11 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
 
+    /**
+     * Обработка ответа при выборе приюта
+     *
+     * @param update
+     */
     private void handlerUpdate(Update update) {
         if (update.callbackQuery() != null) {
             String data = update.callbackQuery().data();
@@ -45,8 +50,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                     handler.handlerUpdatePet(update, data);
                     break;
                 }
-            }
-            else {
+            } else {
                 handlerUpdatePet(data, update.callbackQuery().from().id());
             }
         } else {
@@ -61,6 +65,12 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         }
     }
 
+    /**
+     * Обработка ответа при выборе направлений
+     *
+     * @param data
+     * @param fromId
+     */
     private void handlerUpdatePet(String data, Long fromId) {
         if (data.contains("/Информация_о_приюте")) {
             this.telegramBot.execute(new SendMessage(fromId, String.format("Приют для %s", data.startsWith("/Cats") ? "кошек. Основан..." : "собак. Основан...")));
@@ -81,6 +91,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             this.telegramBot.execute(new SendMessage(fromId, String.format("Вызываю волонтера из приюта для %s", data.startsWith("/Cats") ? "кошек. Подождите..." : "собак. Подождите...")));
         }
     }
+
     public void sendMessage(Long chatId, String message) {
         telegramBot.execute(new SendMessage(chatId, message));
     }
