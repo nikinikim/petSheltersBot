@@ -21,7 +21,7 @@ public class DefaultHandler extends AbstractMessagingHandler {
     }
 
     @Override
-    public void handlerUpdate(Update update) {
+    public void handleUpdate(Update update) {
         telegramBot.execute(new SendMessage(update.message().chat().id(), "Для продолжения нажмите /start"));
     }
 

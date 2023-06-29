@@ -5,9 +5,9 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
-import liquibase.util.StringUtil;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Component
 @Order(1)
@@ -24,7 +24,7 @@ public class StartHandler extends AbstractMessagingHandler {
     }
 
     @Override
-    public void handlerUpdate(Update update) {
+    public void handleUpdate(Update update) {
         InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
         keyboardMarkup.addRow(new InlineKeyboardButton("Приют для кошек").callbackData("/Cats"),
                 new InlineKeyboardButton("Приют для собак").callbackData("/Dogs"));
@@ -34,9 +34,10 @@ public class StartHandler extends AbstractMessagingHandler {
 
     @Override
     public void handlerUpdatePet(Update update, String petType) {
-        if (!StringUtil.isEmpty(petType)) {
+        if (!StringUtils.isEmpty(petType)) {
             InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
             keyboardMarkup.addRow(new InlineKeyboardButton("Информация о приюте").callbackData(String.format("%s/Информация_о_приюте", petType)));
+            keyboardMarkup.addRow(new InlineKeyboardButton("Как взять питомца из приюта").callbackData(String.format("%s/Menu", petType)));
             keyboardMarkup.addRow(new InlineKeyboardButton("Расписание работы приюта, адрес, схема проезда").callbackData(String.format("%s/Контактная_информация", petType)));
             keyboardMarkup.addRow(new InlineKeyboardButton("Контактные данные охраны для оформления пропуска на машину").callbackData(String.format("%s/REGISTRATIONOFCARPASS", petType)));
             keyboardMarkup.addRow(new InlineKeyboardButton("Общие рекомендации о технике безопасности на территории приюта").callbackData(String.format("%s/Техника_безопасности", petType)));
