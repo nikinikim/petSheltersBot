@@ -42,6 +42,7 @@ public class StartHandler extends AbstractMessagingHandler {
             keyboardMarkup.addRow(new InlineKeyboardButton("Контактные данные охраны для оформления пропуска на машину").callbackData(String.format("%s/REGISTRATIONOFCARPASS", petType)));
             keyboardMarkup.addRow(new InlineKeyboardButton("Общие рекомендации о технике безопасности на территории приюта").callbackData(String.format("%s/Техника_безопасности", petType)));
             keyboardMarkup.addRow(new InlineKeyboardButton("Оставить контактные данные для связи").callbackData(String.format("%s/LEAVECONTACTDETAILS", petType)));
+            keyboardMarkup.addRow(new InlineKeyboardButton("Прислать отчет о питомце").callbackData(String.format("%s/report", petType)));
             keyboardMarkup.addRow(new InlineKeyboardButton("Позвать волонтера").callbackData(String.format("%s/Позвать_волонтера", petType)));
             telegramBot.execute(new SendMessage(update.callbackQuery().message().chat().id(), String.format("Выберите направление, нажав на кнопку ниже:"/*, update.message().from().firstName()*/)).replyMarkup(keyboardMarkup));
         }
