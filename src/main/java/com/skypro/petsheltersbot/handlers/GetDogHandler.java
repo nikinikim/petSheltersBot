@@ -49,8 +49,6 @@ public class GetDogHandler extends AbstractMessagingHandler {
         keyboardMarkup.addRow(new InlineKeyboardButton("Позвать волонтера").callbackData(String.format("/callVolunteer")));
         telegramBot.execute(new SendMessage(update.callbackQuery().message().chat().id(), String.format("Внимательно ознакомьтесь с информацией по усыновлению собаки")).replyMarkup(keyboardMarkup));
     }
-
-
     /**
      * Создание кнопки выхода из меню
      *

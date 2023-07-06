@@ -49,9 +49,6 @@ public class GetCatHandler extends AbstractMessagingHandler {
         telegramBot.execute(new SendMessage(update.callbackQuery().message().chat().id(), String.format("Внимательно ознакомьтесь с информацией по усыновлению кошки")).replyMarkup(keyboardMarkup));
     }
 
-
-
-
     /**
      * Создание кнопки выхода из меню
      *

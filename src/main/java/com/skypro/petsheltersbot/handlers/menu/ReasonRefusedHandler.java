@@ -9,7 +9,6 @@ import com.skypro.petsheltersbot.handlers.AbstractMessagingHandler;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 @Component
 @Order()
 public class ReasonRefusedHandler extends AbstractMessagingHandler {

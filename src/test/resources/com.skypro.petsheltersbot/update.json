@@ -1,0 +1,48 @@
+[
+  {
+    "message": {
+      "from": {
+        "id": 1
+      },
+      "chat": {
+        "id": 123
+      },
+      "callbackData": "/Menu"
+    }
+  },
+  {
+    "message": {
+      "from": {
+        "id": 1
+      },
+      "chat": {
+        "id": 123
+      },
+      "callbackData": "/Menu"
+    }
+  },
+  {
+    "message": {
+      "from": {
+        "id": 1
+      },
+      "chat": {
+        "id": 123
+      },
+      "callbackData": "/Menu/ruleDating"
+    },
+    "callback_query": {
+      "id": "123",
+      "data": "/Cats",
+      "message": {
+        "from": {
+          "id": 1
+        },
+        "chat": {
+          "id": 123
+        },
+        "callbackData": "/Menu/ruleDating"
+      }
+    }
+  }
+]

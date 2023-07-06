@@ -10,10 +10,15 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@Order(3)
+@Order(4)
 public class DocumentsHandler extends AbstractMessagingHandler {
     public DocumentsHandler(TelegramBot telegramBot) {
         super(telegramBot);
+    }
+
+    @Override
+    public boolean appliesTo(Update update) {
+        return update.message().text() != null && update.message().text().equals("/documents");
     }
     @Override
     public void handleUpdate(Update update) {
@@ -32,8 +37,4 @@ public class DocumentsHandler extends AbstractMessagingHandler {
 
     }
 
-    @Override
-    public boolean appliesTo(Update update) {
-        return update.message().text() != null && update.message().text().equals("/documents");
-    }
 }

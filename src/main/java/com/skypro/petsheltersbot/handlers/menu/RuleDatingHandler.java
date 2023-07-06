@@ -10,7 +10,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@Order(2)
+@Order(3)
 public class RuleDatingHandler extends AbstractMessagingHandler {
     public RuleDatingHandler(TelegramBot telegramBot) {
         super(telegramBot);
@@ -18,7 +18,7 @@ public class RuleDatingHandler extends AbstractMessagingHandler {
 
     @Override
     public boolean appliesTo(Update update) {
-        return update.message().text() != null && update.message().text().equals("/ruleDating");
+        return update.callbackQuery().message().text() != null && update.callbackQuery().message().text().equals("/ruleDating");
     }
 
     @Override

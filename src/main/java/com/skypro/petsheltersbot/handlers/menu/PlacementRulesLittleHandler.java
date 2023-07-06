@@ -8,7 +8,6 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.skypro.petsheltersbot.handlers.AbstractMessagingHandler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 @Component
 @Order(5)
 public class PlacementRulesLittleHandler extends AbstractMessagingHandler {

@@ -49,6 +49,15 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         this.catUserRepository = catUserRepository;
         this.telegramBot.setUpdatesListener(this);
     }
+
+    /**
+     * Метод process вызывается при получении новых обновлений от Telegram Bot API.
+     * Метод обрабатывает каждое обновление, фильтруя только те, которые содержат сообщения или callback-запросы,
+     * и передает их на обработку методу handleUpdate.
+     *
+     * @return CONFIRMED_UPDATES_ALL, если обновления были успешно обработаны
+     */
+
     @Override
     public int process(List<Update> updates) {
         updates.stream()
@@ -56,11 +65,21 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                 .forEach(this::handleUpdate);
         return CONFIRMED_UPDATES_ALL;
     }
-
+    /**
+     * Метод init вызывается после создания объекта и регистрирует текущий объект в качестве слушателя обновлений у объекта telegramBot.
+     */
     @PostConstruct
     public void init() {
         telegramBot.setUpdatesListener(this);
     }
+
+    /**
+     * Метод handleUpdate перебирает список telegramHandlers и вызывает метод appliesTo для каждого обработчика,
+     * чтобы определить, какой обработчик должен быть использован для обработки данного обновления.
+     * Затем метод вызывает метод handleUpdate для выбранного обработчика.
+     *
+     * @param update объект, представляющий входящее сообщение
+     */
 
     public void handleUpdate(Update update) {
         if (update.callbackQuery() != null) {
@@ -119,10 +138,16 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
             keyboardMarkup.addRow(new InlineKeyboardButton("Правила знакомства питомцем").callbackData(String.format("/ruleDating")));
             keyboardMarkup.addRow(new InlineKeyboardButton("Список документов на усыновление").callbackData(String.format("/documents")));
-            keyboardMarkup.addRow(new InlineKeyboardButton("Правила перевозки собаки или щенка").callbackData(String.format("/transportirationRules")));
-            keyboardMarkup.addRow(new InlineKeyboardButton("Правила размещения щенка").callbackData(String.format("/placementRulesLittle")));
-            keyboardMarkup.addRow(new InlineKeyboardButton("Правила размещения взрослой собаки").callbackData(String.format("/placementRulesBig")));
-            keyboardMarkup.addRow(new InlineKeyboardButton("Правила размещения животного c ограниченными возможностям").callbackData(String.format("/specialPlacementRules")));
+            keyboardMarkup.addRow(new InlineKeyboardButton("Правила перевозки питомца").callbackData(String.format("/transportirationRules")));
+            keyboardMarkup.addRow(new InlineKeyboardButton("Правила размещения маленького питомца").callbackData(String.format("/placementRulesLittle")));
+            keyboardMarkup.addRow(new InlineKeyboardButton("Правила размещения взрослого питомца").callbackData(String.format("/placementRulesBig")));
+            keyboardMarkup.addRow(new InlineKeyboardButton("Правила размещения питомца c ограниченными возможностями").callbackData(String.format("/specialPlacementRules")));
+            if (data.contains("/Dogs")) {
+                keyboardMarkup.addRow(new InlineKeyboardButton("Первые советы кинолога").callbackData(String.format("/firstTipsDogHandler")));
+                keyboardMarkup.addRow(new InlineKeyboardButton("Причины обращения к кинологу").callbackData(String.format("/reasonsContactingDogHandler")));
+
+            }
+
             keyboardMarkup.addRow(new InlineKeyboardButton("Причины отказа").callbackData(String.format("/reasonRefused")));
             keyboardMarkup.addRow(new InlineKeyboardButton("Регистрация").callbackData(String.format("/registration")));
             keyboardMarkup.addRow(new InlineKeyboardButton("Позвать волонтера").callbackData(String.format("/callVolunteer")));
@@ -204,6 +229,66 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                     "взять животное с особенностями, соблюдайте общие правила " +
                     "их «знакомства» и делайте это постепенно ", data.contains("/specialPlacementRules"))).replyMarkup(keyboardMarkup));
         }
+        if (data.contains("/firstTipsDogHandler")) {
+            InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+            keyboardMarkup.addRow(new InlineKeyboardButton("Причины обращения к кинологу").callbackData(String.format("/reasonsContactingDogHandler")));
+            this.telegramBot.execute(new SendMessage(fromId, String.format("1. Не жалейте награды.Наградой для собаки может быть вкусное лакомство, " +
+                            "игры или совместная деятельность. Не жадничайте \n\n " +
+                            "2. никогда не наказывайте собаку. Примените отрицательное " +
+                            "подкрепление — это неприятное воздействие на собаку " +
+                            "непосредственно в тот момент, когда она совершает запретное действие. " +
+                            "Тогда она прекрасно поймет, что именно привело к такому результату. \n\n " +
+                            "3. научитесь понимать язык тела собаки.Собаки показывают так называемые " +
+                            "сигналы примирения — это порой трудноуловимые телодвижения, которые в " +
+                            "конкретной ситуации несут важный смысл. \n\n " +
+                            "4.  правильно хвалите собаку.  " +
+                            "Об этом вам сможет рассказать только ваша собственная собака. " +
+                            "Всем нравится по-разному: в разных местах, с разной силой, " +
+                            "продолжительностью и интенсивностью. \n\n " +
+                            "5. будьте последовательны.Собака легко приспособится к любым " +
+                            "правилам. Главное, чтобы они были неизменны. Иначе она никак " +
+                            "не сможет предугадать ваше поведение \n\n " +
+                            "6. будьте доступными для собаки. Не игнорируйте собаку, " +
+                            "если она подошла к вам восстановить эмоциональную связь. ",
+                    data.contains("/firstTipsDogHandler"))).replyMarkup(keyboardMarkup));
+        }
+
+        if (data.contains("/reasonsContactingDogHandler")) {
+            InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+            keyboardMarkup.addRow(new InlineKeyboardButton("Причины отказа").callbackData(String.format("/reasonRefused")));
+            this.telegramBot.execute(new SendMessage(fromId, String.format("1. Вы впервые решили завести щенка. Консультация кинолога еще до того, как в " +
+                            "вашем доме появилась собака, поможет избежать множества проблем с воспитанием собаки. \n\n " +
+                            "2. Начальный курс дрессировки «пробуксовывает». Если вы не можете добиться от щенка " +
+                            "понимания и послушания, если освоение первоначальных команд идет с трудом, " +
+                            "вы выходите из терпения — кинолог поможет вам «найти ключик» к животному \n\n " +
+                            "3. Собака слушается вас «под настроение». Команды хозяина должны выполняться " +
+                            "беспрекословно — и с первого раза. Если же питомец слушается вас через " +
+                            "раз — это сигнал, что вы не справляетесь с выстраиванием взаимоотношений. " +
+                            "Своенравность не только осложняет совместную жизнь с собакой: если питомец " +
+                            "беспрекословно не повинуется командам во время прогулки без поводка, " +
+                            "это может быть опасно для его жизни и здоровья. \n\n " +
+                            "4. У животного проблемы во взаимоотношениях с другими собаками. " +
+                            "Если питомец, сталкиваясь с собратьями, проявляет агрессию или " +
+                            "трусость — это знак того, что пора обращаться к кинологу " +
+                            "с запросом на социализацию. \n\n " +
+                            "5. Собака пытается завоевать место лидера: пытается занять" +
+                            " хозяйское место, требует кормить ее в первую очередь, не повинуется " +
+                            "членам семьи. Это значит, что хозяевам пора научиться объяснять, " +
+                            "кто здесь главный на понятном собакам языке — и это тоже поможет " +
+                            "сделать кинолог.\n\n " +
+                            "6. Ваш питомец «хулиганит» дома в ваше отсутствие: портит или " +
+                            "разбрасывает вещи, справляет нужду в неположенном месте, заливается " +
+                            "лаем или громко скулит. Это тоже отклонение — и тоже знак того, " +
+                            "что хозяину и собаки нужно помочь наладить взаимопонимание. \n\n " +
+                            "7. Собаке предстоит участие в выставке. В таком случае ей " +
+                            "обязательно нужен курс хорошей ринговой дрессировки. И, если " +
+                            "хозяин не является опытным собаководом – без помощи профессионала " +
+                            "тут не обойтись. Правильно подготовленные собаки как правило " +
+                            "оцениваются выше, чем превосходящие их по физическим данным, " +
+                            "но не умеющие себя вести животные.",
+                    data.contains("/reasonsContactingDogHandler"))).replyMarkup(keyboardMarkup));
+
+        }
         if (data.contains("/reasonRefused")) {
             InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
             keyboardMarkup.addRow(new InlineKeyboardButton("Регистрация").callbackData(String.format("/registration")));
@@ -273,6 +358,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                     .state(CatStatus.LOGIN)
                     .build();
             return catUserRepository.save(transientCatUser);
+
 
         }
         return persistentCatUser;

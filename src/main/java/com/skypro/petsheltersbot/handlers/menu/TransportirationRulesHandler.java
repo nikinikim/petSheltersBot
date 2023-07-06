@@ -8,11 +8,17 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@Order(4)
+@Order(5)
 public class TransportirationRulesHandler extends AbstractMessagingHandler {
     public TransportirationRulesHandler(TelegramBot telegramBot) {
         super(telegramBot);
     }
+
+    @Override
+    public boolean appliesTo(Update update) {
+        return update.message().text() != null && update.message().text().equals("/transportirationRules");
+    }
+
     @Override
     public void handleUpdate(Update update) {
         telegramBot.execute(new SendMessage(update.message().chat().id(),
@@ -23,6 +29,8 @@ public class TransportirationRulesHandler extends AbstractMessagingHandler {
                         "перевозку, можете попросить у человека, у которого берете питомца, или у друзей. \n\n" +
                         "Запаситесь дополнительными покрывалами на сидения,  бумажными полотенцами, \n\n " +
                         "спросите в приюте или у волонтеров об особенностях перевозки питомца в машине."));
+        telegramBot.execute(new SendMessage(update.message().chat().id(),
+                "Для ознакомления с правилами транспортировки собаки, нажмите /transportirationRules"));
 
     }
 
@@ -31,8 +39,4 @@ public class TransportirationRulesHandler extends AbstractMessagingHandler {
 
     }
 
-    @Override
-    public boolean appliesTo(Update update) {
-        return update.message().text() != null && update.message().text().equals("/transportirationRules");
-    }
 }
