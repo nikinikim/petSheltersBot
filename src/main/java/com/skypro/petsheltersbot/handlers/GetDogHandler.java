@@ -5,6 +5,7 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
+import liquibase.util.StringUtil;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -24,9 +25,14 @@ public class GetDogHandler extends AbstractMessagingHandler {
 
     @Override
     public boolean appliesTo(Update update) {
-        return update.message().chat().id() != null && update.message().equals("/Menu");
+        return update.message().text() != null && update.message().text().equals("/Menu");
     }
 
+    /**
+     * Ответ на запрос "Как взять собаку из приюта"
+     *
+     * @param update
+     */
     @Override
     public void handleUpdate(Update update) {
         InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
@@ -41,15 +47,25 @@ public class GetDogHandler extends AbstractMessagingHandler {
         keyboardMarkup.addRow(new InlineKeyboardButton("Причины отказа").callbackData(String.format("/reasonRefused")));
         keyboardMarkup.addRow(new InlineKeyboardButton("Регистрация").callbackData(String.format("/registration")));
         keyboardMarkup.addRow(new InlineKeyboardButton("Позвать волонтера").callbackData(String.format("/callVolunteer")));
-        telegramBot.execute(new SendMessage(update.message().chat().id(), String.format("Ознакомьтесь с информацией по усыновлению вашего будущего питомца", update.message().from().firstName())).replyMarkup(keyboardMarkup));
-
+        telegramBot.execute(new SendMessage(update.callbackQuery().message().chat().id(), String.format("Внимательно ознакомьтесь с информацией по усыновлению собаки")).replyMarkup(keyboardMarkup));
     }
+
+
+    /**
+     * Создание кнопки выхода из меню
+     *
+     * @param update
+     * @param petType
+     */
 
     @Override
     public void handlerUpdatePet(Update update, String petType) {
-        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
-        keyboardMarkup.addRow(new InlineKeyboardButton("Правила знакомства c питомцем").callbackData(String.format("/ruleDatingCat")));
-        this.telegramBot.execute(new SendMessage(update.callbackQuery().message().from().id(), String.format("Если Вы хотите ознакомиться с правилами знакомства питомцем, нажмите кнопку ниже", update.callbackQuery().message().chat().id())).replyMarkup(keyboardMarkup));
+        if (!StringUtil.isEmpty(petType)) {
+            InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+            keyboardMarkup.addRow(new InlineKeyboardButton("Главное меню").callbackData("/start"));
+            telegramBot.execute(new SendMessage(update.message().chat().id(), String.format("Вернуться к выбору приюта, нажмите кнопку ниже", update.message().from().firstName())).replyMarkup(keyboardMarkup));
+        }
+
     }
 
     @Order(8)
