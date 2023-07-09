@@ -32,7 +32,6 @@ public class SpecialPlacementRulesHandler extends AbstractMessagingHandler {
     public void handlerUpdatePet(Update update, String petType) {
 
     }
-
     @Override
     public boolean appliesTo(Update update) {
         return update.message().text() != null && update.message().text().equals("/specialPlacementRules");

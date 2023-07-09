@@ -38,7 +38,6 @@ public class ReasonRefusedHandler extends AbstractMessagingHandler {
                 "Все интересующие вопросы Вы можете задать нашим волонтерам, нажав /callVolunteer"));
 
     }
-
     @Override
     public void handlerUpdatePet(Update update, String petType) {
 
