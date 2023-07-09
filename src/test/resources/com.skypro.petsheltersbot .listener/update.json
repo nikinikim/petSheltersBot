@@ -1,0 +1,48 @@
+[
+  {
+    "message": {
+      "from": {
+        "id": 1
+      },
+      "chat": {
+        "id": 123
+      },
+      "text": "/start"
+    }
+  },
+  {
+    "message": {
+      "from": {
+        "id": 1
+      },
+      "chat": {
+        "id": 123
+      },
+      "text": "/Dogs"
+    }
+  },
+  {
+    "message": {
+      "from": {
+        "id": 1
+      },
+      "chat": {
+        "id": 123
+      },
+      "text": "/Cats/Информация_о_приюте"
+    },
+    "callback_query": {
+      "id": "123",
+      "data": "/Cats",
+      "message": {
+        "from": {
+          "id": 1
+        },
+        "chat": {
+          "id": 123
+        },
+        "text": "/Cats/Информация_о_приюте"
+      }
+    }
+  }
+]
