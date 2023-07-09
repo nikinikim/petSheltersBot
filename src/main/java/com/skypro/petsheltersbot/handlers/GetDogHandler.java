@@ -21,7 +21,6 @@ public class GetDogHandler extends AbstractMessagingHandler {
         new ReasonRefusedHandler(telegramBot);
 
     }
-
     @Override
     public boolean appliesTo(Update update) {
         return update.message().chat().id() != null && update.message().equals("/Menu");

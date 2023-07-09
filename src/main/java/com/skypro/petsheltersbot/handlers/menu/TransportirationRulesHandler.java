@@ -25,7 +25,6 @@ public class TransportirationRulesHandler extends AbstractMessagingHandler {
                         "спросите в приюте или у волонтеров об особенностях перевозки питомца в машине."));
 
     }
-
     @Override
     public void handlerUpdatePet(Update update, String petType) {
 

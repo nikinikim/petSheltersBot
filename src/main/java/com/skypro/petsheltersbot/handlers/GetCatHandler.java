@@ -17,7 +17,6 @@ import java.util.Map;
 @Order(2)
 public class GetCatHandler extends AbstractMessagingHandler {
 
-
     public GetCatHandler(TelegramBot telegramBot) {
         super(telegramBot);
     }

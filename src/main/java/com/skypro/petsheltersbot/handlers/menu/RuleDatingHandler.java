@@ -20,7 +20,6 @@ public class RuleDatingHandler extends AbstractMessagingHandler {
     public boolean appliesTo(Update update) {
         return update.message().text() != null && update.message().text().equals("/ruleDating");
     }
-
     @Override
     public void handleUpdate(Update update) {
         telegramBot.execute(new SendMessage(update.message().chat().id(),

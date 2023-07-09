@@ -41,7 +41,6 @@ public class FirstTipsDogHandler extends AbstractMessagingHandler {
         telegramBot.execute(new SendMessage(update.message().chat().id(),
                 "Для ознакомления со списком документов по усыновлению кошки/котёнка, нажмите /documents"));
     }
-
     @Override
     public void handlerUpdatePet(Update update, String petType) {
 

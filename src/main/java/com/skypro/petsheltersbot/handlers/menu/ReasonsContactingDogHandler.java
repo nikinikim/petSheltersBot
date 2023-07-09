@@ -47,8 +47,7 @@ public class ReasonsContactingDogHandler extends AbstractMessagingHandler {
                         "оцениваются выше, чем превосходящие их по физическим данным, " +
                         "но не умеющие себя вести животные."));
         telegramBot.execute(new SendMessage(update.message().chat().id(),
-                "Для ознакомления с правилами размещения взрослой кошки" +
-                        "после приезда из приюта, нажмите /placementRulesBig"));
+                "Для ознакомления с причинами отказа, нажмите /reasonRefused"));
     }
 
     @Override
