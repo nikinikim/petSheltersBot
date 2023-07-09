@@ -8,5 +8,4 @@ public abstract class AbstractMessagingHandler implements TelegramHandler {
     public AbstractMessagingHandler(TelegramBot telegramBot) {
         this.telegramBot = telegramBot;
     }
-
 }
