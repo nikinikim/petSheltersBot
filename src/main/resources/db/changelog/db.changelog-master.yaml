@@ -2,10 +2,10 @@ databaseChangeLog:
   - logicalFilePath: db/changelog/db.changelog-master.yaml
   - changeSet:
       id: 1
-      author: andrew
+      author: fox
       changes:
         - createTable:
-            tableName: message
+            tableName: user_shelter
             columns:
               - column:
                   name: id
@@ -15,11 +15,23 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: chat_id
-                  type: BIGINT
-              - column:
-                  name: notification
+                  name: first_name_dog_user
                   type: text
               - column:
-                  name: send_date
-                  type: timestamp
+                  name: last_name_dog_user
+                  type: text
+              - column:
+                  name: login
+                  type: text
+              - column:
+                  name: password
+                  type: text
+              - column:
+                  name: state
+                  type: INTEGER
+              - column:
+                  name: telegram_user_id
+                  type: BIGINT
+              - column:
+                  name: user_name
+                  type: text
